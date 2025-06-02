@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="65dc432f-7ca5-4fed-93e5-3e5a5d05bfcb" name="変更" comment="">
+      <change afterPath="$PROJECT_DIR$/eslint.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/custom-sw.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/icons/icon-192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/icons/icon-512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/img1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/img2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/img3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/img4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/img5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/img6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/img7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/register-sw.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/BackgroundCanvas.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MemoPad.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Sidebar.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Sidebar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/sidebarLinks.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/Vector2.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eslint.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/eslint.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/postcss.config.mjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="php" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2xZm4vcSY7bwy0f9bYTsR8AaW37" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/hideyuki/Projects/beginning-here&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/hideyuki/Projects/beginning-here/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/packages/feature-motivate/src/app" />
+      <recent name="$PROJECT_DIR$/packages/feature-links" />
+      <recent name="$PROJECT_DIR$/packages/feature-motivate" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/images" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/bin" />
+      <recent name="$PROJECT_DIR$/public/icons" />
+      <recent name="$PROJECT_DIR$/packages/feature-motivate/src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.Next.js: サーバーサイド">
+    <configuration name="Next.js: クライアントサイドのデバッグ" type="JavascriptDebugType" uri="http://localhost:3000/">
+      <method v="2" />
+    </configuration>
+    <configuration name="Next.js: サーバーサイド" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-PS-251.25410.148" />
+        <option value="bundled-php-predefined-a98d8de5180a-c5828cf854d9-com.jetbrains.php.sharedIndexes-PS-251.25410.148" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="デフォルトタスク">
+      <changelist id="65dc432f-7ca5-4fed-93e5-3e5a5d05bfcb" name="変更" comment="" />
+      <created>1748153781892</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1748153781892</updated>
+      <workItem from="1748153783009" duration="4603000" />
+      <workItem from="1748158815635" duration="1439000" />
+      <workItem from="1748160269305" duration="733000" />
+      <workItem from="1748162932522" duration="1465000" />
+      <workItem from="1748164661267" duration="439000" />
+      <workItem from="1748165228667" duration="3612000" />
+      <workItem from="1748177439997" duration="4385000" />
+      <workItem from="1748236479759" duration="1491000" />
+      <workItem from="1748262810409" duration="1074000" />
+      <workItem from="1748303327360" duration="3135000" />
+      <workItem from="1748308506335" duration="460000" />
+      <workItem from="1748312870411" duration="3492000" />
+      <workItem from="1748318479130" duration="1455000" />
+      <workItem from="1748322253975" duration="275000" />
+      <workItem from="1748342431511" duration="1848000" />
+      <workItem from="1748386145962" duration="78000" />
+      <workItem from="1748527448059" duration="533000" />
+      <workItem from="1748564378100" duration="52000" />
+      <workItem from="1748564528606" duration="5125000" />
+      <workItem from="1748640691893" duration="262000" />
+      <workItem from="1748680940120" duration="1531000" />
+      <workItem from="1748684005216" duration="76000" />
+      <workItem from="1748738091383" duration="335000" />
+      <workItem from="1748763936070" duration="91000" />
+      <workItem from="1748764870488" duration="64000" />
+      <workItem from="1748766555422" duration="153000" />
+      <workItem from="1748766766468" duration="443000" />
+      <workItem from="1748819191347" duration="54000" />
+      <workItem from="1748834320863" duration="79000" />
+      <workItem from="1748861692658" duration="908000" />
+      <workItem from="1748904513329" duration="480000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

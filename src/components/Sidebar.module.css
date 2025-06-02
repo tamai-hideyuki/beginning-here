@@ -1,0 +1,112 @@
+/* Sidebar.module.css */
+
+/* 背景オーバーレイはそのまま黒透過でOK */
+.overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 100;
+}
+.overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* サイドバー本体：ダーク背景＋ぼかしで高級感を演出 */
+.sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 280px; height: 100%;
+    background: rgba(17, 24, 39, 0.95); /* #111827 に 95% 不透明度 */
+    backdrop-filter: blur(8px);
+    color: #f3f4f6; /* Tailwind の gray-100 相当 */
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.3);
+    z-index: 1000;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 開いたときのスライドイン */
+.sidebar.open {
+    transform: translateX(0);
+}
+
+/* 閉じるボタンは白抜きで視認性向上 */
+.closeButton {
+    background: none;
+    border: none;
+    color: #f3f4f6;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+/* ナビゲーション項目の装飾 */
+.nav {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+.category {
+    margin-bottom: 1.5rem;
+}
+.categoryTitle {
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 600;    /* font-semibold */
+    color: #9ca3af;      /* gray-400 */
+    margin-bottom: 0.5rem;
+}
+.navLink {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;     /* text-base */
+    color: #fcd34d;      /* yellow-300 */
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.navLink:hover {
+    text-decoration: underline;
+    color: #fde047;      /* yellow-200 */
+}
+
+/* スクロールバーもダークテーマに */
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 4px;
+}
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+
+.categoryToggle {
+    background: none;      /* 背景を完全に消す */
+    border: none;          /* 枠線も消す */
+    width: 100%;           /* 横幅いっぱい */
+    text-align: left;      /* テキストを左寄せ */
+    padding: 0.5rem;       /* 適度な余白 */
+    color: #ffffff;        /* 文字色を白に */
+    cursor: pointer;       /* ホバーで手のカーソルに */
+}
+
+.categoryToggle:hover {
+    color: #e5e7eb;        /* ホバー時に少し明るく */
+}
+
+.categoryToggle:focus {
+    outline: none;         /* フォーカス時のアウトラインを消す */
+}
+.navLink {
+    /* 既存の設定はそのままに、左側の余白を追加 */
+    padding-left: 1.5rem;   /* 16px */
+}

@@ -1,103 +1,184 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+import { useState, useEffect, useRef, memo } from 'react';
+import pageStyles from './page.module.css';
+import sidebarStyles from '@/components/Sidebar.module.css';
+import { Sidebar } from '@/components/Sidebar';
+import { sidebarLinks, LinkCategory, LinkItem } from '@/components/sidebarLinks';
+import { MemoPad } from '@/components/MemoPad';
+import { phrases } from '@/utils/motivation';
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+/* ─── 1. 画像配列をモジュールスコープに出す ─── */
+const IMAGES: string[] = [
+    '/images/img1.png',
+    '/images/img2.png',
+    '/images/img3.png',
+    '/images/img4.png',
+    '/images/img5.png',
+    '/images/img6.png',
+    '/images/img7.png',
+    // 必要に応じてさらに追加
+];
+
+const LinkList: React.FC<{ category: LinkCategory }> = memo(({ category }) => {
+    const links: LinkItem[] = category.items
+        ? category.items
+        : category.groups
+            ? category.groups.flatMap((group) => group.items)
+            : [];
+
+    return (
+        <div className={sidebarStyles.linkList}>
+            {links.map((link) => (
+                <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={sidebarStyles.navLink}
+                >
+                    {link.name}
+                </a>
+            ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+    );
+});
+LinkList.displayName = 'LinkList';
+
+const CategorySection: React.FC<{ category: LinkCategory }> = ({ category }) => {
+    const [open, setOpen] = useState<boolean>(false);
+    const hasContent = Boolean(category.items || category.groups);
+
+    return (
+        <section className={sidebarStyles.categorySection}>
+            <button
+                className={sidebarStyles.categoryToggle}
+                onClick={() => setOpen((prev) => !prev)}
+                aria-expanded={open}
+            >
+                {open ? '▼' : '▶'} <span>{category.category}</span>
+            </button>
+
+            {open && (
+                <div className={sidebarStyles.categoryContent}>
+                    {hasContent && <LinkList category={category} />}
+                    {category.groups &&
+                        category.groups.map((group) => (
+                            <div key={group.groupName} className={sidebarStyles.subGroup}>
+                                <h4 className={sidebarStyles.subGroupTitle}>{group.groupName}</h4>
+                                <div className={sidebarStyles.linkList}>
+                                    {group.items.map((link) => (
+                                        <a
+                                            key={link.href}
+                                            href={link.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={sidebarStyles.navLink}
+                                        >
+                                            {link.name}
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                </div>
+            )}
+        </section>
+    );
+};
+
+/* ─── 2. スクロール用カルーセルを描画するコンポーネント ─── */
+const ScrollCarousel: React.FC = () => {
+    // ── (a) ref で scrollContent の要素を取得
+    const carouselRef = useRef<HTMLDivElement>(null);
+    // ── (b) 1セット分の幅 (px) を state に保持
+    const [carouselWidth, setCarouselWidth] = useState(0);
+
+    useEffect(() => {
+        const el = carouselRef.current;
+        if (!el) return;
+
+        /*
+          el.scrollWidth = 「実際に並べられた 2 セット分の総幅」
+          その半分が → 「1セット分」の幅になるので /2 する
+        */
+        const totalWidth = el.scrollWidth;
+        const singleWidth = totalWidth / 2;
+        setCarouselWidth(singleWidth);
+    }, []);
+
+    // ── 2セットに結合した配列を一度だけ作成
+    const doubledImages = [...IMAGES, ...IMAGES];
+
+    return (
+        /*
+           (c) CSS 変数 --carousel-width を inline-style で設定
+           - Next.js/React では CSS Modules のルールでも var(--carousel-width) が使える
+        */
+        <div
+            className={pageStyles.scrollContainer}
+            style={{ '--carousel-width': `${carouselWidth}px` } as React.CSSProperties}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+            <div ref={carouselRef} className={pageStyles.scrollContent}>
+                {doubledImages.map((src, index) => {
+                    // 余計な margin は与えず、自然に並べるだけにする
+                    return (
+                        <img
+                            key={`${src}-${index}`}
+                            src={src}
+                            alt="スクロール画像"
+                            className={pageStyles.carouselImage}
+                        />
+                    );
+                })}
+            </div>
+        </div>
+    );
+};
+ScrollCarousel.displayName = 'ScrollCarousel';
+
+/* ─── 3. Home コンポーネント本体 ─── */
+export default function Home() {
+    const [message, setMessage] = useState<string>('');
+    const [isSidebarOpen, setSidebarOpen] = useState<boolean>(false);
+
+    const toggleSidebar = () => setSidebarOpen((prev) => !prev);
+    const generateMessage = () =>
+        setMessage(phrases[Math.floor(Math.random() * phrases.length)]);
+
+    return (
+        <>
+            {/* ─── サイドバー + メモパッド ─── */}
+            <Sidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)}>
+                <nav className={sidebarStyles.nav}>
+                    {sidebarLinks.map((cat) => (
+                        <CategorySection key={cat.category} category={cat} />
+                    ))}
+                </nav>
+                <div className={sidebarStyles.memoContainer}>
+                    <MemoPad className="w-full" />
+                </div>
+            </Sidebar>
+
+            {/* ─── メインコンテンツ ─── */}
+            <main className={pageStyles.main}>
+                <header className={pageStyles.header}>
+                    <button onClick={toggleSidebar} className={pageStyles.menuButton}>
+                        ≡
+                    </button>
+                    <h1 className={`${pageStyles.title} ${pageStyles.titleGradient}`}>
+                        beginning-here
+                    </h1>
+                </header>
+
+                <button onClick={generateMessage} className={pageStyles.button}>
+                    やる気スイッチ
+                </button>
+                {message && <div className={pageStyles.message}>{message}</div>}
+            </main>
+
+            {/* ─── 画面下部に固定して無限ループスクロールする領域 ─── */}
+            <ScrollCarousel />
+        </>
+    );
 }

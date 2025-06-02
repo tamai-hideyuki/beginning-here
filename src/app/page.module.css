@@ -1,0 +1,257 @@
+/* page.module.css */
+
+/* ─────────────────────────────────────────────────────────────
+   共通：メイン領域
+───────────────────────────────────────────────────────────── */
+.main {
+    min-height: 200vh;       /* ビューポートの2倍確保 */
+    padding-bottom: 150px;   /* フッター（scrollContainer）分を余白で確保 */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   1. ヘッダーまわり
+───────────────────────────────────────────────────────────── */
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin-top: 5cm; /* 必要に応じて調整 */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   2. メニュー（ハンバーガー）ボタン
+───────────────────────────────────────────────────────────── */
+.menuButton {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1100;
+    font-size: 1.75rem;
+    background: none;
+    border: none;
+    color: #e5e7eb;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.menuButton:hover {
+    color: #9d4edd;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   3. タイトルまわり
+───────────────────────────────────────────────────────────── */
+.title {
+    margin: 0 auto 1.5rem;
+    text-align: center;
+    font-size: 3rem;
+    line-height: 1.2;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    color: #f3f4f6;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.titleGradient {
+    background: linear-gradient(90deg, #9333ea, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   4. 「やる気スイッチ」ボタン
+───────────────────────────────────────────────────────────── */
+@keyframes floatBreathe {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-10px) scale(1.02);
+    }
+}
+
+.button {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.75rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f3f4f6;
+    background: linear-gradient(135deg, #4f46e5, #9333ea);
+    border: none;
+    border-radius: 9999px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    animation: floatBreathe 4s ease-in-out infinite;
+}
+.button:hover {
+    transform: translateY(-3px) scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   5. サイドバー関連（カテゴリ＋リンク）まわり
+───────────────────────────────────────────────────────────── */
+.categorySection {
+    margin-bottom: 1rem;
+}
+
+.categoryToggle {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+.categoryContent {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+}
+
+.linkList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.subGroup {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+}
+.subGroupTitle {
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   6. メッセージ（やる気メッセージ）まわり
+───────────────────────────────────────────────────────────── */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(-5%);
+    }
+    50% {
+        transform: translateY(0);
+    }
+}
+
+.message {
+    display: block;
+    width: max-content;
+    margin: 1rem auto 0;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #ffffe0;
+    font-family: 'Courier New', monospace;
+    white-space: nowrap;
+    animation: bounce 1s infinite ease-in-out;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   7. サイドバー全体（ナビゲーションエリア）まわり
+───────────────────────────────────────────────────────────── */
+.nav {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background: #1f2937;
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.category {
+    margin-bottom: 1.25rem;
+}
+
+.categoryTitle {
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.navLink {
+    position: relative;
+    display: block;
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    font-size: 1rem;
+    color: #e5e7eb;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.navLink::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #9333ea;
+}
+.navLink:hover {
+    color: #9d4edd;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   8. メモパッドコンテナまわり
+───────────────────────────────────────────────────────────── */
+.memoContainer {
+    padding: 1rem;
+    background: #111827;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   9. アニメーション定義（フェードイン＋スクロール）まとめ
+───────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* 「--carousel-width」 で渡されたピクセル分だけスライドする */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-1 * var(--carousel-width)));
+    }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   10. 固定フッター（スクロール画像）まわり
+───────────────────────────────────────────────────────────── */
+.scrollContainer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;       /* 必要に応じて調整 */
+    overflow: hidden;    /* はみ出しを隠す */
+    background-color: transparent;
+    z-index: 0;
+}
+
+.scrollContent {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    animation: scroll 20s linear infinite;
+}
+
+/* 画像をつなげるだけ。余計なマージンは不要 */
+.carouselImage {
+    flex-shrink: 0;
+    height: 100px;       /* scrollContainer の height より少し余裕を持たせる */
+    /* margin-right は JavaScript で考慮済みなので CSS には不要 */
+}
