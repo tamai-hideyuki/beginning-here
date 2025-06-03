@@ -1,0 +1,142 @@
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 2rem 2vw 1rem 2vw;
+
+    background: linear-gradient(90deg, #181825cc 30%, #232949cc 100%);
+    box-shadow: 0 -8px 32px 0 #000d;
+    border-top: 2px solid #6c63ffcc;
+    backdrop-filter: blur(10px) brightness(1.06) saturate(1.3);
+    animation: cyberIn 0.9s cubic-bezier(.4,1.6,.4,1) 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+/* アニメーション定義はそのまま */
+@keyframes cyberIn {
+    0%   { transform: translateY(80px) scale(0.96); opacity: 0; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* ─── 見出し（title）─── */
+.heading {
+    color: #fff;
+    text-shadow: 0 0 6px #5efcff, 0 0 1px #e0e0e0;
+    letter-spacing: 0.12em;
+    font-size: 1.5rem; /* 少し大きめにしてフッター内で目立たせる */
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+/* ─── メモ入力欄 ─── */
+.memoArea {
+    width: 100%;
+    flex-grow: 0;
+    min-height: 4rem;
+    max-height: 120px;
+    background: #232949dd;
+    border: 1px solid #5efcff88;
+    border-radius: 0.4rem;
+    color: #e0eafc;
+    font-size: 1.08rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 12px #2228;
+    transition: border 0.2s;
+    padding: 0.5rem;
+}
+.memoArea:focus {
+    outline: none;
+    border-color: #6c63ff;
+    background: #202c3ad8;
+}
+
+/* ─── ボタン行 ─── */
+.buttonRow {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 0.5rem;
+}
+
+/* ─── クリアボタン ─── */
+.clearButton {
+    margin-right: 2cm; /* 右端から2cmだけ左へずらす */
+    background: linear-gradient(90deg, #5efcff 40%, #6c63ff 100%);
+    color: #181825;
+    border: none;
+    border-radius: 2em;
+    font-weight: 600;
+    padding: 0.4em 1.2em;
+    box-shadow: 0 2px 10px #6c63ff55;
+    cursor: pointer;
+    letter-spacing: 0.08em;
+    transition: filter 0.18s, box-shadow 0.22s;
+}
+.clearButton:hover {
+    filter: brightness(1.13) contrast(1.16) drop-shadow(0 0 4px #5efcff99);
+}
+
+/* ─── 画像アップロードセクション ─── */
+.imageSection {
+    margin-top: 1rem;
+}
+
+/* ─── 画像ラベル ─── */
+.imageLabel {
+    color: #aefcff;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+}
+.fileInput {
+    margin-left: 0.8em;
+    accent-color: #5efcff;
+}
+
+/* ─── プレビューコンテナ ─── */
+.previewContainer {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* ─── プレビュー画像 ─── */
+.previewImage {
+    max-width: 220px;
+    max-height: 120px;
+    border-radius: 0.3em;
+    box-shadow: 0 2px 10px #0008;
+    border: 1px solid #6c63ff55;
+    background: #181825;
+}
+
+/* ─── “画像なし” テキスト ─── */
+.noImageText {
+    color: #4efcffa0;
+    font-size: 0.98em;
+    margin-top: 0.4em;
+}
+
+/* ─── ダウンロードリンク ─── */
+.downloadLink {
+    display: inline-block;
+    margin-left: 1rem;
+    background: linear-gradient(90deg, #5efcff 40%, #6c63ff 100%);
+    color: #181825;
+    border: none;
+    border-radius: 2em;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-align: center;
+    padding: 0.4em 1.2em;
+    box-shadow: 0 2px 10px #6c63ff55;
+    transition: filter 0.18s, box-shadow 0.22s;
+}
+.downloadLink:hover {
+    filter: brightness(1.13) contrast(1.16) drop-shadow(0 0 4px #5efcff99);
+}
