@@ -1,9 +1,24 @@
 /* ─────────────────────────────────────────────────────────────
-   共通：メイン領域
+   ラッパー：上下2つの100vhセクションを縦に並べる
 ───────────────────────────────────────────────────────────── */
-.main {
-    min-height: 200vh;
-    padding-bottom: 200px;
+.wrapper {
+    width: 100%;
+    height: 200vh; /* 上段100vh + 下段100vh を合計して200vhにする */
+    margin: 0;
+    padding: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   上段セクション：高さ100vh
+───────────────────────────────────────────────────────────── */
+.topSection {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 必要に応じて中央寄せ */
+    align-items: center;
+    background-color: #0f111d;
+    padding: 2rem;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -14,7 +29,6 @@
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    margin-top: 5cm;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -88,8 +102,38 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   5. サイドバー関連（カテゴリ＋リンク）
+   5. メッセージ（やる気メッセージ）まわり
 ───────────────────────────────────────────────────────────── */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(-5%);
+    }
+    50% {
+        transform: translateY(0);
+    }
+}
+.message {
+    display: block;
+    width: max-content;
+    margin: 1rem auto 0;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #ffffe0;
+    font-family: 'Courier New', monospace;
+    white-space: nowrap;
+    animation: bounce 1s infinite ease-in-out;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   6. サイドバー全体（ナビゲーションエリア）
+───────────────────────────────────────────────────────────── */
+.nav {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background: #1f2937;
+    border-radius: 0 0.5rem 0.5rem 0;
+}
 .categorySection {
     margin-bottom: 1rem;
 }
@@ -121,51 +165,6 @@
     font-size: 0.9rem;
     font-weight: 600;
 }
-
-/* ─────────────────────────────────────────────────────────────
-   6. やる気メッセージ
-───────────────────────────────────────────────────────────── */
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(-5%);
-    }
-    50% {
-        transform: translateY(0);
-    }
-}
-.message {
-    display: block;
-    width: max-content;
-    margin: 1rem auto 0;
-    text-align: center;
-    font-size: 1.5rem;
-    color: #ffffe0;
-    font-family: 'Courier New', monospace;
-    white-space: nowrap;
-    animation: bounce 1s infinite ease-in-out;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   7. サイドバー全体（ナビゲーションエリア）
-───────────────────────────────────────────────────────────── */
-.nav {
-    display: flex;
-    flex-direction: column;
-    padding: 1.5rem;
-    background: #1f2937;
-    border-radius: 0 0.5rem 0.5rem 0;
-}
-.nav .category {
-    margin-bottom: 1.25rem;
-}
-.nav .categoryTitle {
-    margin-bottom: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #9ca3af;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
 .navLink {
     position: relative;
     display: block;
@@ -187,7 +186,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   8. メモパッドコンテナまわり
+   7. メモパッドコンテナまわり
 ───────────────────────────────────────────────────────────── */
 .memoContainer {
     padding: 1rem;
@@ -198,44 +197,10 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   9. アニメーション定義：フェードイン＋スクロール
+   8. アニメーション定義：フェードイン
 ───────────────────────────────────────────────────────────── */
 @keyframes fadeIn {
     to {
         opacity: 1;
     }
-}
-/* スクロール用アニメーション変数を活用 */
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-1 * var(--carousel-width)));
-    }
-}
-
-/* ─────────────────────────────────────────────────────────────
-   10. 固定フッター（スクロール画像）まわり
-───────────────────────────────────────────────────────────── */
-.scrollContainer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 120px;
-    overflow: hidden;
-    background-color: transparent;
-    z-index: 0;
-}
-.scrollContent {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    animation: scroll 20s linear infinite;
-}
-.carouselImage {
-    flex-shrink: 0;
-    height: 100px;     /* scrollContainer の高さに合わせる */
-    /* margin-right は JavaScript 側で制御しているため不要 */
 }

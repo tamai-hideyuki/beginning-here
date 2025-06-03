@@ -1,3 +1,4 @@
+// src/app/page.tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -7,16 +8,13 @@ import { Sidebar } from '@/components/Sidebar';
 import { sidebarLinks, LinkCategory, LinkItem } from '@/components/sidebarLinks';
 import { MemoPad } from '@/components/MemoPad';
 import { phrases } from '@/utils/motivation';
-//import ScrollCarousel from '@/components/ScrollCarousel';
 import TempStorageArea from '@/components/TempStorageArea';
 
 /**
  * Home ページコンポーネント
  *  ・やる気スイッチ
  *  ・サイドバー + MemoPad
- *  ・下部にスクロールカルーセル
- *  ・下部に TempStorageArea
- *  → これらすべてをデフォルトエクスポートとしてまとめる
+ *  ・「上下 2 画面分」（上段100vh：メインコンテンツ／下段100vh：TempStorageArea）
  */
 export default function Home() {
     const [message, setMessage] = useState<string>('');
@@ -39,31 +37,29 @@ export default function Home() {
                 </div>
             </Sidebar>
 
-            {/* ─── メインコンテンツ ─── */}
-            <main className={pageStyles.main}>
-                <header className={pageStyles.header}>
-                    <button onClick={toggleSidebar} className={pageStyles.menuButton}>
-                        ≡
+            {/* ─── メイン＆フッター全体をラップするコンテナ ─── */}
+            <div className={pageStyles.wrapper}>
+                {/* ─── 上段：高さ 100vh のメインコンテンツ ─── */}
+                <div className={pageStyles.topSection}>
+                    <header className={pageStyles.header}>
+                        <button onClick={toggleSidebar} className={pageStyles.menuButton}>
+                            ≡
+                        </button>
+                        <h1 className={`${pageStyles.title} ${pageStyles.titleGradient}`}>
+                            beginning-here
+                        </h1>
+                    </header>
+
+                    {/* やる気スイッチ */}
+                    <button onClick={generateMessage} className={pageStyles.button}>
+                        やる気スイッチ
                     </button>
-                    <h1 className={`${pageStyles.title} ${pageStyles.titleGradient}`}>
-                        beginning-here
-                    </h1>
-                </header>
+                    {message && <div className={pageStyles.message}>{message}</div>}
+                </div>
 
-                {/* やる気スイッチ */}
-                <button onClick={generateMessage} className={pageStyles.button}>
-                    やる気スイッチ
-                </button>
-                {message && <div className={pageStyles.message}>{message}</div>}
-
-                {/* ─── ここに一時メモ＆画像保管エリアを挿入 ─── */}
-                <section>
-                    <TempStorageArea />
-                </section>
-            </main>
-
-            {/* ─── 画面下部に固定して無限ループスクロールする領域 ─── */}
-            {/*<ScrollCarousel />*/}
+                {/* ─── 下段：高さ 100vh の TempStorageArea （フッター相当） ─── */}
+                <TempStorageArea />
+            </div>
         </>
     );
 }
