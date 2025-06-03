@@ -155,8 +155,9 @@ export const sidebarLinks: LinkCategory[] = [
         ],
     },
     {
-        category: "ネットワーク",
+        category: "その他",
         items: [
+            { name: "TradingView", href: "https://jp.tradingview.com/chart/mUWNEyK8/?symbol=FX%3AUSDJPY"},
             { name: "ngrok", href: "https://dashboard.ngrok.com/get-started/setup/macos" },
         ],
     },
