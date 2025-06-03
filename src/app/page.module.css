@@ -1,11 +1,9 @@
-/* page.module.css */
-
 /* ─────────────────────────────────────────────────────────────
    共通：メイン領域
 ───────────────────────────────────────────────────────────── */
 .main {
-    min-height: 200vh;       /* ビューポートの2倍確保 */
-    padding-bottom: 150px;   /* フッター（scrollContainer）分を余白で確保 */
+    min-height: 200vh;
+    padding-bottom: 200px;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -16,11 +14,11 @@
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    margin-top: 5cm; /* 必要に応じて調整 */
+    margin-top: 5cm;
 }
 
 /* ─────────────────────────────────────────────────────────────
-   2. メニュー（ハンバーガー）ボタン
+   2. ハンバーガーメニューボタン
 ───────────────────────────────────────────────────────────── */
 .menuButton {
     position: fixed;
@@ -52,7 +50,6 @@
     opacity: 0;
     animation: fadeIn 1s ease-out forwards;
 }
-
 .titleGradient {
     background: linear-gradient(90deg, #9333ea, #4f46e5, #9333ea);
     -webkit-background-clip: text;
@@ -70,7 +67,6 @@
         transform: translateY(-10px) scale(1.02);
     }
 }
-
 .button {
     display: block;
     margin: 1rem auto;
@@ -92,12 +88,11 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   5. サイドバー関連（カテゴリ＋リンク）まわり
+   5. サイドバー関連（カテゴリ＋リンク）
 ───────────────────────────────────────────────────────────── */
 .categorySection {
     margin-bottom: 1rem;
 }
-
 .categoryToggle {
     display: flex;
     align-items: center;
@@ -108,18 +103,15 @@
     padding: 0.5rem;
     font-weight: bold;
 }
-
 .categoryContent {
     margin-top: 0.5rem;
     padding-left: 1rem;
 }
-
 .linkList {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
-
 .subGroup {
     margin-top: 0.5rem;
     padding-left: 1rem;
@@ -131,7 +123,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   6. メッセージ（やる気メッセージ）まわり
+   6. やる気メッセージ
 ───────────────────────────────────────────────────────────── */
 @keyframes bounce {
     0%, 100% {
@@ -141,7 +133,6 @@
         transform: translateY(0);
     }
 }
-
 .message {
     display: block;
     width: max-content;
@@ -155,7 +146,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   7. サイドバー全体（ナビゲーションエリア）まわり
+   7. サイドバー全体（ナビゲーションエリア）
 ───────────────────────────────────────────────────────────── */
 .nav {
     display: flex;
@@ -164,12 +155,10 @@
     background: #1f2937;
     border-radius: 0 0.5rem 0.5rem 0;
 }
-
-.category {
+.nav .category {
     margin-bottom: 1.25rem;
 }
-
-.categoryTitle {
+.nav .categoryTitle {
     margin-bottom: 0.5rem;
     font-size: 0.875rem;
     font-weight: 600;
@@ -177,7 +166,6 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
-
 .navLink {
     position: relative;
     display: block;
@@ -210,15 +198,14 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   9. アニメーション定義（フェードイン＋スクロール）まとめ
+   9. アニメーション定義：フェードイン＋スクロール
 ───────────────────────────────────────────────────────────── */
 @keyframes fadeIn {
     to {
         opacity: 1;
     }
 }
-
-/* 「--carousel-width」 で渡されたピクセル分だけスライドする */
+/* スクロール用アニメーション変数を活用 */
 @keyframes scroll {
     0% {
         transform: translateX(0);
@@ -236,22 +223,19 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 120px;       /* 必要に応じて調整 */
-    overflow: hidden;    /* はみ出しを隠す */
+    height: 120px;
+    overflow: hidden;
     background-color: transparent;
     z-index: 0;
 }
-
 .scrollContent {
     display: flex;
     align-items: center;
     height: 100%;
     animation: scroll 20s linear infinite;
 }
-
-/* 画像をつなげるだけ。余計なマージンは不要 */
 .carouselImage {
     flex-shrink: 0;
-    height: 100px;       /* scrollContainer の height より少し余裕を持たせる */
-    /* margin-right は JavaScript で考慮済みなので CSS には不要 */
+    height: 100px;     /* scrollContainer の高さに合わせる */
+    /* margin-right は JavaScript 側で制御しているため不要 */
 }

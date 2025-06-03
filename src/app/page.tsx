@@ -1,26 +1,78 @@
 'use client';
 
-import { useState, useEffect, useRef, memo } from 'react';
+import React, { useState } from 'react';
 import pageStyles from './page.module.css';
 import sidebarStyles from '@/components/Sidebar.module.css';
 import { Sidebar } from '@/components/Sidebar';
 import { sidebarLinks, LinkCategory, LinkItem } from '@/components/sidebarLinks';
 import { MemoPad } from '@/components/MemoPad';
 import { phrases } from '@/utils/motivation';
+//import ScrollCarousel from '@/components/ScrollCarousel';
+import TempStorageArea from '@/components/TempStorageArea';
 
-/* ─── 1. 画像配列をモジュールスコープに出す ─── */
-const IMAGES: string[] = [
-    '/images/img1.png',
-    '/images/img2.png',
-    '/images/img3.png',
-    '/images/img4.png',
-    '/images/img5.png',
-    '/images/img6.png',
-    '/images/img7.png',
-    // 必要に応じてさらに追加
-];
+/**
+ * Home ページコンポーネント
+ *  ・やる気スイッチ
+ *  ・サイドバー + MemoPad
+ *  ・下部にスクロールカルーセル
+ *  ・下部に TempStorageArea
+ *  → これらすべてをデフォルトエクスポートとしてまとめる
+ */
+export default function Home() {
+    const [message, setMessage] = useState<string>('');
+    const [isSidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
-const LinkList: React.FC<{ category: LinkCategory }> = memo(({ category }) => {
+    const toggleSidebar = () => setSidebarOpen((prev) => !prev);
+    const generateMessage = () => setMessage(phrases[Math.floor(Math.random() * phrases.length)]);
+
+    return (
+        <>
+            {/* ─── サイドバー + MemoPad ─── */}
+            <Sidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)}>
+                <nav className={sidebarStyles.nav}>
+                    {sidebarLinks.map((cat) => (
+                        <CategorySection key={cat.category} category={cat} />
+                    ))}
+                </nav>
+                <div className={sidebarStyles.memoContainer}>
+                    <MemoPad className="w-full" />
+                </div>
+            </Sidebar>
+
+            {/* ─── メインコンテンツ ─── */}
+            <main className={pageStyles.main}>
+                <header className={pageStyles.header}>
+                    <button onClick={toggleSidebar} className={pageStyles.menuButton}>
+                        ≡
+                    </button>
+                    <h1 className={`${pageStyles.title} ${pageStyles.titleGradient}`}>
+                        beginning-here
+                    </h1>
+                </header>
+
+                {/* やる気スイッチ */}
+                <button onClick={generateMessage} className={pageStyles.button}>
+                    やる気スイッチ
+                </button>
+                {message && <div className={pageStyles.message}>{message}</div>}
+
+                {/* ─── ここに一時メモ＆画像保管エリアを挿入 ─── */}
+                <section>
+                    <TempStorageArea />
+                </section>
+            </main>
+
+            {/* ─── 画面下部に固定して無限ループスクロールする領域 ─── */}
+            {/*<ScrollCarousel />*/}
+        </>
+    );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   以下は、サイドバー内部で使われる小コンポーネント。
+   page.tsx の中に残しても Next.js が怒らない「ファイル内部の名前付き定義」
+───────────────────────────────────────────────────────────── */
+function LinkList({ category }: { category: LinkCategory }) {
     const links: LinkItem[] = category.items
         ? category.items
         : category.groups
@@ -42,10 +94,9 @@ const LinkList: React.FC<{ category: LinkCategory }> = memo(({ category }) => {
             ))}
         </div>
     );
-});
-LinkList.displayName = 'LinkList';
+}
 
-const CategorySection: React.FC<{ category: LinkCategory }> = ({ category }) => {
+function CategorySection({ category }: { category: LinkCategory }) {
     const [open, setOpen] = useState<boolean>(false);
     const hasContent = Boolean(category.items || category.groups);
 
@@ -84,101 +135,5 @@ const CategorySection: React.FC<{ category: LinkCategory }> = ({ category }) => 
                 </div>
             )}
         </section>
-    );
-};
-
-/* ─── 2. スクロール用カルーセルを描画するコンポーネント ─── */
-const ScrollCarousel: React.FC = () => {
-    // ── (a) ref で scrollContent の要素を取得
-    const carouselRef = useRef<HTMLDivElement>(null);
-    // ── (b) 1セット分の幅 (px) を state に保持
-    const [carouselWidth, setCarouselWidth] = useState(0);
-
-    useEffect(() => {
-        const el = carouselRef.current;
-        if (!el) return;
-
-        /*
-          el.scrollWidth = 「実際に並べられた 2 セット分の総幅」
-          その半分が → 「1セット分」の幅になるので /2 する
-        */
-        const totalWidth = el.scrollWidth;
-        const singleWidth = totalWidth / 2;
-        setCarouselWidth(singleWidth);
-    }, []);
-
-    // ── 2セットに結合した配列を一度だけ作成
-    const doubledImages = [...IMAGES, ...IMAGES];
-
-    return (
-        /*
-           (c) CSS 変数 --carousel-width を inline-style で設定
-           - Next.js/React では CSS Modules のルールでも var(--carousel-width) が使える
-        */
-        <div
-            className={pageStyles.scrollContainer}
-            style={{ '--carousel-width': `${carouselWidth}px` } as React.CSSProperties}
-        >
-            <div ref={carouselRef} className={pageStyles.scrollContent}>
-                {doubledImages.map((src, index) => {
-                    // 余計な margin は与えず、自然に並べるだけにする
-                    return (
-                        <img
-                            key={`${src}-${index}`}
-                            src={src}
-                            alt="スクロール画像"
-                            className={pageStyles.carouselImage}
-                        />
-                    );
-                })}
-            </div>
-        </div>
-    );
-};
-ScrollCarousel.displayName = 'ScrollCarousel';
-
-/* ─── 3. Home コンポーネント本体 ─── */
-export default function Home() {
-    const [message, setMessage] = useState<string>('');
-    const [isSidebarOpen, setSidebarOpen] = useState<boolean>(false);
-
-    const toggleSidebar = () => setSidebarOpen((prev) => !prev);
-    const generateMessage = () =>
-        setMessage(phrases[Math.floor(Math.random() * phrases.length)]);
-
-    return (
-        <>
-            {/* ─── サイドバー + メモパッド ─── */}
-            <Sidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)}>
-                <nav className={sidebarStyles.nav}>
-                    {sidebarLinks.map((cat) => (
-                        <CategorySection key={cat.category} category={cat} />
-                    ))}
-                </nav>
-                <div className={sidebarStyles.memoContainer}>
-                    <MemoPad className="w-full" />
-                </div>
-            </Sidebar>
-
-            {/* ─── メインコンテンツ ─── */}
-            <main className={pageStyles.main}>
-                <header className={pageStyles.header}>
-                    <button onClick={toggleSidebar} className={pageStyles.menuButton}>
-                        ≡
-                    </button>
-                    <h1 className={`${pageStyles.title} ${pageStyles.titleGradient}`}>
-                        beginning-here
-                    </h1>
-                </header>
-
-                <button onClick={generateMessage} className={pageStyles.button}>
-                    やる気スイッチ
-                </button>
-                {message && <div className={pageStyles.message}>{message}</div>}
-            </main>
-
-            {/* ─── 画面下部に固定して無限ループスクロールする領域 ─── */}
-            <ScrollCarousel />
-        </>
     );
 }
