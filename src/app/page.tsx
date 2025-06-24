@@ -7,7 +7,7 @@ import { Sidebar } from '@/components/Sidebar';
 import { sidebarLinks, LinkCategory, LinkItem } from '@/components/sidebarLinks';
 import { MemoPad } from '@/components/MemoPad';
 import { phrases } from '@/utils/motivation';
-import TempStorageArea from '@/components/TempStorageArea';
+import { MultiRangeTable } from "@/components/MultiRangeTable";
 
 /**
  * Home ページコンポーネント
@@ -57,7 +57,7 @@ export default function Home() {
                 </div>
 
                 {/* ─── 下段：高さ 100vh の TempStorageArea （フッター相当） ─── */}
-                <TempStorageArea />
+                <MultiRangeTable />
             </div>
         </>
     );
