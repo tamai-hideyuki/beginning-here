@@ -1,29 +1,32 @@
-'use client'
+'use client';
 
-import { FC, ReactNode } from 'react'
-import styles from './Sidebar.module.css'
+import { FC, ReactNode, MouseEvent } from 'react';
+import styles from './Sidebar.module.css';
 
 type SidebarProps = {
-    isOpen: boolean
-    onClose: () => void
-    children: ReactNode
-}
+    isOpen: boolean;
+    onClose: () => void;
+    children: ReactNode;
+};
 
-export const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, children }) => {
+const Sidebar: FC<SidebarProps> = ({ isOpen, onClose, children }) => {
+    const handleOverlayClick = (e: MouseEvent) => {
+        if (e.target === e.currentTarget) onClose();
+    };
+
     return (
         <div
             className={`${styles.overlay} ${isOpen ? styles.open : ''}`}
-            onClick={onClose}
+            onClick={handleOverlayClick}
         >
-            <aside
-                className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}
-                onClick={e => e.stopPropagation()}
-            >
+            <aside className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
                 <button className={styles.closeButton} onClick={onClose}>
                     ×
                 </button>
                 {children}
             </aside>
         </div>
-    )
-}
+    );
+};
+
+export default Sidebar;
