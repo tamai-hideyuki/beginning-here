@@ -5,10 +5,9 @@ import dynamic from 'next/dynamic';
 import pageStyles from './page.module.css';
 import sidebarStyles from '@/components/styles/Sidebar.module.css';
 import Sidebar from '@/components/Sidebar';
-import { MemoPad } from '@/components/MemoPad';
 import { phrases } from '@/utils/motivation';
 import { MultiRangeTable } from '@/components/MultiRangeTable';
-import { CountdownTimer } from '@/components/CountdownTimer';
+import CountdownTimer from '@/components/CountdownTimer';
 
 const SidebarContent = dynamic(
     () => import('@/components/SidebarContent').then(mod => mod.default),

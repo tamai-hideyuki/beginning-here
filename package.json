@@ -1,23 +1,27 @@
 {
-  "name": "arcana-summoner-lite",
+  "name": "beginning-here",
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
-    "dev":   "next dev -H 0.0.0.0 -p 3443",
+    "dev": "cross-env NODE_ENV=development next dev -H 0.0.0.0 -p ${PORT:-3443}",
     "build": "next build",
-    "start": "next start -p 3040",
+    "start": "cross-env NODE_ENV=production next start -p ${PORT:-${PORT:-3040}}",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "prepare": "prisma generate",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\""
   },
   "dependencies": {
     "@prisma/client": "^6.11.1",
-    "express": "^5.1.0",
-    "morgan": "^1.10.0",
     "next": "^15.3.2",
     "next-pwa": "^5.6.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "redis": "^5.6.0"
   },
   "devDependencies": {
     "@eslint/css": "^0.8.1",
@@ -30,7 +34,9 @@
     "@types/morgan": "^1.9.10",
     "@types/node": "^22.15.21",
     "@types/react": "^19.1.5",
+    "@types/redis": "^4.0.10",
     "autoprefixer": "^10.4.21",
+    "cross-env": "^7.0.3",
     "eslint": "^9.27.0",
     "eslint-plugin-react": "^7.37.5",
     "globals": "^16.2.0",

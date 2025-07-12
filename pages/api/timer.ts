@@ -1,63 +1,43 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
 
-type Data = {
-    remainingMs: number;
-    running:     boolean;
-};
+export type TimerResponse = { remainingMs: number; running: boolean };
+const DEFAULT_MS = 10_000n * 3_600n * 1_000n;
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<Data>
+    res: NextApiResponse<TimerResponse>
 ) {
-    const id = 'singleton';
+    const ID = 'singleton';
 
     if (req.method === 'GET') {
-        let rec = await prisma.timer.findUnique({
-            where: { id },
-        });
-
+        let rec = await prisma.timer.findUnique({ where: { id: ID } });
         if (!rec) {
             rec = await prisma.timer.create({
-                data: {
-                    id,
-                    remainingMs:   BigInt(10000 * 3600 * 1000),
-                    running:       false,
-                    lastUpdatedAt: new Date(),
-                },
+                data: { id: ID, remainingMs: DEFAULT_MS, running: false, lastUpdatedAt: new Date() },
             });
         }
-
         return res.status(200).json({
             remainingMs: Number(rec.remainingMs),
-            running:     rec.running,
+            running: rec.running,
         });
     }
 
     if (req.method === 'POST') {
-        const { remainingMs, running } = req.body as {
-            remainingMs: number;
-            running:     boolean;
-        };
+        const { remainingMs, running } = req.body as { remainingMs: number; running: boolean };
+        const msBigInt = BigInt(Math.floor(remainingMs));
 
-        await prisma.timer.upsert({
-            where: { id },
-            update: {
-                remainingMs:   BigInt(remainingMs),
-                running,
-                lastUpdatedAt: new Date(),
-            },
-            create: {
-                id,
-                remainingMs:   BigInt(remainingMs),
-                running,
-                lastUpdatedAt: new Date(),
-            },
+        const rec = await prisma.timer.update({
+            where: { id: ID },
+            data: { remainingMs: msBigInt, running, lastUpdatedAt: new Date() },
         });
 
-        return res.status(200).json({ remainingMs, running });
+        return res.status(200).json({
+            remainingMs: Number(rec.remainingMs),
+            running: rec.running,
+        });
     }
 
     res.setHeader('Allow', ['GET', 'POST']);
-    res.status(405).end();
+    return res.status(405).end();
 }
