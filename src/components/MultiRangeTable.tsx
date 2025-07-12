@@ -14,7 +14,6 @@ export function MultiRangeTable() {
                 const API_KEY   = process.env.NEXT_PUBLIC_SHEETS_API_KEY!;
                 const sheetName = process.env.NEXT_PUBLIC_SHEET_NAME!;
 
-                // 読みたい範囲リスト
                 const ranges = [
                     'B3:E3',
                     'B4:E4',
@@ -27,7 +26,6 @@ export function MultiRangeTable() {
                     'B11:E11',
                 ];
 
-                // URL クエリ文字列を組み立て
                 const qs = ranges
                     .map(r => `ranges=${encodeURIComponent(`${sheetName}!${r}`)}`)
                     .join('&');
@@ -46,8 +44,6 @@ export function MultiRangeTable() {
                 }
 
                 const data = (await res.json()) as BatchGetResponse;
-                // valueRanges の順番が ranges 配列と対応しているので、
-                // 各 valueRanges[i].values![0] を row として使う
                 const fetchedRows = data.valueRanges?.map(vr => vr.values?.[0] ?? []) ?? [];
                 setRows(fetchedRows);
 
