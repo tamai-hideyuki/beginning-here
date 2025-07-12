@@ -48,7 +48,7 @@ export default function Home() {
                             ≡
                         </button>
                         <h1 className={`${pageStyles.title} ${pageStyles.titleGradient}`}>
-                            beginning-here
+                            どんな問題を解決しようとしているの？
                         </h1>
                     </header>
 
