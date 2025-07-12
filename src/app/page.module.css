@@ -1,29 +1,68 @@
-/* ─────────────────────────────────────────────────────────────
-   ラッパー：上下2つの100vhセクションを縦に並べる
-───────────────────────────────────────────────────────────── */
 .wrapper {
     width: 100%;
-    height: 200vh; /* 上段100vh + 下段100vh を合計して200vhにする */
+    height: 200vh;            /* 上段100vh + 下段100vh */
     margin: 0;
     padding: 0;
+    position: relative;       /* 疑似要素用基点 */
+    overflow: hidden;         /* アニメーション外部を隠す */
 }
 
-/* ─────────────────────────────────────────────────────────────
-   上段セクション：高さ100vh
-───────────────────────────────────────────────────────────── */
+.wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: linear-gradient(
+            120deg,
+            rgba(47,79,79,0.8)   0%,
+            rgba(105,105,105,0.8) 25%,
+            rgba(47,79,79,0.8)   50%,
+            rgba(25,25,112,0.8)   75%,
+            rgba(47,79,79,0.8)  100%
+    );
+    animation: backgroundDrift 45s ease-in-out infinite;
+    will-change: transform;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('data:image/svg+xml;utf8,\
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">\
+<filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="1" stitchTiles="stitch"/></filter>\
+<rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
+    animation: subtleNoise 5s infinite alternate;
+    will-change: opacity;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ドリフトアニメーション */
+@keyframes backgroundDrift {
+    0%   { transform: translate(0%, 0%)   rotate(0deg)   scale(1); }
+    50%  { transform: translate(10%, 10%) rotate(10deg)  scale(1.05); }
+    100% { transform: translate(0%, 0%)   rotate(0deg)   scale(1); }
+}
+
+/* ノイズ強度調整 */
+@keyframes subtleNoise {
+    0%, 100% { opacity: 0.01; }
+    50%      { opacity: 0.05; }
+}
+
 .topSection {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* 必要に応じて中央寄せ */
+    justify-content: center;
     align-items: center;
     background-color: #0f111d;
     padding: 2rem;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   1. ヘッダーまわり
-───────────────────────────────────────────────────────────── */
 .header {
     display: flex;
     justify-content: center;
@@ -31,13 +70,9 @@
     padding: 1rem;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   2. ハンバーガーメニューボタン
-───────────────────────────────────────────────────────────── */
 .menuButton {
     position: fixed;
-    top: 1rem;
-    left: 1rem;
+    top: 1rem; left: 1rem;
     z-index: 1100;
     font-size: 1.75rem;
     background: none;
@@ -50,9 +85,6 @@
     color: #9d4edd;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   3. タイトルまわり
-───────────────────────────────────────────────────────────── */
 .title {
     margin: 0 auto 1.5rem;
     text-align: center;
@@ -70,16 +102,9 @@
     -webkit-text-fill-color: transparent;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   4. 「やる気スイッチ」ボタン
-───────────────────────────────────────────────────────────── */
 @keyframes floatBreathe {
-    0%, 100% {
-        transform: translateY(0) scale(1);
-    }
-    50% {
-        transform: translateY(-10px) scale(1.02);
-    }
+    0%,100% { transform: translateY(0) scale(1); }
+    50%     { transform: translateY(-10px) scale(1.02); }
 }
 .button {
     display: block;
@@ -91,7 +116,7 @@
     background: linear-gradient(135deg, #4f46e5, #9333ea);
     border: none;
     border-radius: 9999px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.5);
     cursor: pointer;
     transition: transform 0.3s ease, filter 0.3s ease;
     animation: floatBreathe 4s ease-in-out infinite;
@@ -101,16 +126,9 @@
     filter: brightness(1.1);
 }
 
-/* ─────────────────────────────────────────────────────────────
-   5. メッセージ（やる気メッセージ）まわり
-───────────────────────────────────────────────────────────── */
 @keyframes bounce {
-    0%, 100% {
-        transform: translateY(-5%);
-    }
-    50% {
-        transform: translateY(0);
-    }
+    0%,100% { transform: translateY(-5%); }
+    50%     { transform: translateY(0); }
 }
 .message {
     display: block;
@@ -124,9 +142,6 @@
     animation: bounce 1s infinite ease-in-out;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   6. サイドバー全体（ナビゲーションエリア）
-───────────────────────────────────────────────────────────── */
 .nav {
     display: flex;
     flex-direction: column;
@@ -134,97 +149,24 @@
     background: #1f2937;
     border-radius: 0 0.5rem 0.5rem 0;
 }
-.categorySection {
-    margin-bottom: 1rem;
-}
-.categoryToggle {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    font-weight: bold;
-}
-.categoryContent {
-    margin-top: 0.5rem;
-    padding-left: 1rem;
-}
-.linkList {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-.subGroup {
-    margin-top: 0.5rem;
-    padding-left: 1rem;
-}
-.subGroupTitle {
-    margin-bottom: 0.25rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-.navLink {
-    position: relative;
-    display: block;
-    margin-bottom: 0.5rem;
-    padding-left: 0.5rem;
-    font-size: 1rem;
-    color: #e5e7eb;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-.navLink::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: #9333ea;
-}
-.navLink:hover {
-    color: #9d4edd;
-}
 
-/* ─────────────────────────────────────────────────────────────
-   7. メモパッドコンテナまわり
-───────────────────────────────────────────────────────────── */
-.memoContainer {
-    padding: 1rem;
-    background: #111827;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: auto;
-    border-radius: 0 0.5rem 0.5rem 0;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   8. アニメーション定義：フェードイン
-───────────────────────────────────────────────────────────── */
 @keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
+    to { opacity: 1; }
 }
-
-
 
 .timerContainer {
     margin: 2rem 0;
     text-align: center;
 }
-
-/* タイマー本体 */
 .countdownTimer {
-    font-size: 2.5rem;       /* 大きめに */
+    font-size: 2.5rem;
     font-weight: 600;
-    color: #ffffff;          /* 白文字 */
-    text-shadow:             /* 少し立体感を */
-            0 1px 2px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
     user-select: none;
 }
-
-/* 状態メッセージ */
 .countdownLabel {
     margin-top: 0.5rem;
     font-size: 1rem;
-    color: #cbd5e1; /* 空色 */
+    color: #cbd5e1;
 }
