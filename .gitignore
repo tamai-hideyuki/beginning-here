@@ -43,6 +43,7 @@ localhost+3.pem
 *.tsbuildinfo
 next-env.d.ts
 
+.env.local
 .next/
 node_modules/
 out/
