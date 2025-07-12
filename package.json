@@ -8,6 +8,7 @@
     "build": "next build",
     "export": "next export",
     "start": "next start",
+    "preview": "npx serve -l 3040 out",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "type-check": "tsc --noEmit"
