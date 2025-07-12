@@ -204,3 +204,27 @@
         opacity: 1;
     }
 }
+
+
+
+.timerContainer {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+/* タイマー本体 */
+.countdownTimer {
+    font-size: 2.5rem;       /* 大きめに */
+    font-weight: 600;
+    color: #ffffff;          /* 白文字 */
+    text-shadow:             /* 少し立体感を */
+            0 1px 2px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+/* 状態メッセージ */
+.countdownLabel {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #cbd5e1; /* 空色 */
+}

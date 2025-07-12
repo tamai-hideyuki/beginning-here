@@ -1,7 +1,7 @@
 'use client';
 
 import React, { FC, useState, useCallback, useMemo } from 'react';
-import styles from './Sidebar.module.css';
+import styles from './styles/Sidebar.module.css';
 import { sidebarLinks, LinkCategory, LinkItem, LinkGroup } from './sidebarLinks';
 
 const LinkList: FC<{ links: LinkItem[] }> = React.memo(({ links }) => (
