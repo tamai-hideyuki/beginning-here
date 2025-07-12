@@ -33,10 +33,10 @@ export const CategorySection: FC<{ category: LinkCategory }> = React.memo(
         const [open, setOpen] = useState(false);
         const toggle = useCallback(() => setOpen((v) => !v), []);
 
-        const flatLinks = useMemo<LinkItem[]>(
-            () => category.groups.flatMap((g) => g.items),
-            [category.groups]
-        );
+        //const flatLinks = useMemo<LinkItem[]>(
+        //    () => category.groups.flatMap((g) => g.items),
+        //    [category.groups]
+        //);
 
         return (
             <section className={styles.categorySection}>
@@ -51,7 +51,7 @@ export const CategorySection: FC<{ category: LinkCategory }> = React.memo(
                 {open && (
                     <div className={styles.categoryContent}>
 
-                        <LinkList links={flatLinks} />
+                        {/* <LinkList links={flatLinks} /> */}
 
                         {category.groups.map((g) => (
                             <SubGroup key={g.title} group={g} />
