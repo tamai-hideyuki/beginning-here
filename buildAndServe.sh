@@ -14,5 +14,6 @@ npm run build
 echo "[OK]   : ビルド完了"
 sleep 1
 
-echo "[INFO] : 静的ファイルを起動中（http://localhost:3000）..."
-npx serve out --single
+echo "[INFO] : 静的ファイルを起動中（http://localhost:3040）..."
+#npx serve out --single
+npm run preview
