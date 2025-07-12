@@ -42,8 +42,13 @@ localhost+3.pem
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
+.env
 .next/
 node_modules/
 out/
 .idea/
+
+prisma/dev.db
+prisma/dev.d
+prisma/migrations/
+public/workbox-8112c9d9.js

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import styles from './TempStorageArea.module.css';
+import styles from './styles/TempStorageArea.module.css';
 
 export const TempStorageArea: React.FC = () => {
     const [memoText, setMemoText] = useState<string>('');

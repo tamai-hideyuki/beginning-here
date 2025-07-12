@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, ReactNode, MouseEvent } from 'react';
-import styles from './Sidebar.module.css';
+import styles from './styles/Sidebar.module.css';
 
 type SidebarProps = {
     isOpen: boolean;
