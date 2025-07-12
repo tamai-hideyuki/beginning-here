@@ -1,5 +1,3 @@
-/* Sidebar.module.css */
-
 /* 背景オーバーレイはそのまま黒透過でOK */
 .overlay {
     position: fixed;
@@ -21,9 +19,9 @@
     position: fixed;
     top: 0; left: 0;
     width: 280px; height: 100%;
-    background: rgba(17, 24, 39, 0.95); /* #111827 に 95% 不透明度 */
+    background: rgba(17, 24, 39, 0.95);
     backdrop-filter: blur(8px);
-    color: #f3f4f6; /* Tailwind の gray-100 相当 */
+    color: #f3f4f6;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     box-shadow: 2px 0 12px rgba(0,0,0,0.3);
@@ -65,14 +63,21 @@
 .navLink {
     display: block;
     margin-bottom: 0.5rem;
-    font-size: 1rem;     /* text-base */
-    color: #fcd34d;      /* yellow-300 */
+    font-size: 1rem;
+    color: #fcd34d;
     text-decoration: none;
     transition: color 0.2s;
 }
 .navLink:hover {
     text-decoration: underline;
-    color: #fde047;      /* yellow-200 */
+    color: #fde047;
+}
+
+
+.linkList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 /* スクロールバーもダークテーマに */
@@ -90,23 +95,23 @@
 
 
 .categoryToggle {
-    background: none;      /* 背景を完全に消す */
-    border: none;          /* 枠線も消す */
-    width: 100%;           /* 横幅いっぱい */
-    text-align: left;      /* テキストを左寄せ */
-    padding: 0.5rem;       /* 適度な余白 */
-    color: #ffffff;        /* 文字色を白に */
-    cursor: pointer;       /* ホバーで手のカーソルに */
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 0.5rem;
+    color: #ffffff;
+    cursor: pointer;
 }
 
 .categoryToggle:hover {
-    color: #e5e7eb;        /* ホバー時に少し明るく */
+    color: #e5e7eb;
 }
 
 .categoryToggle:focus {
-    outline: none;         /* フォーカス時のアウトラインを消す */
+    outline: none;
 }
 .navLink {
     /* 既存の設定はそのままに、左側の余白を追加 */
-    padding-left: 1.5rem;   /* 16px */
+    padding-left: 1.5rem;
 }
