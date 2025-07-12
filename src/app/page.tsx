@@ -35,7 +35,7 @@ export default function Home() {
             <Sidebar isOpen={isSidebarOpen} onClose={() => setSidebarOpen(false)}>
                 <SidebarContent />
                 <div className={sidebarStyles.memoContainer}>
-                    <MemoPad className="w-full" />
+                    {/* <MemoPad className="w-full" />*/}
                 </div>
             </Sidebar>
 
