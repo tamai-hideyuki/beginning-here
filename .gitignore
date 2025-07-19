@@ -47,7 +47,7 @@ next-env.d.ts
 node_modules/
 out/
 .idea/
-
+src/utils/motivation.ts
 prisma/dev.db
 prisma/dev.d
 prisma/migrations/
