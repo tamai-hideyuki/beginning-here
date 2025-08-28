@@ -1,0 +1,23 @@
+.timerDisplay {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    font-family: 'Courier New', monospace;
+}
+
+.timeGroup {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.timeValue {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.milliseconds {
+    font-size: 32px;
+}
