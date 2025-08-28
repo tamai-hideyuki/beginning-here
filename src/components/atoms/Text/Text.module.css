@@ -1,0 +1,89 @@
+.text {
+    margin: 0;
+    padding: 0;
+}
+
+/* Variants */
+.h1 {
+    font-size: 48px;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.h2 {
+    font-size: 36px;
+    line-height: 1.3;
+    font-weight: 600;
+}
+
+.h3 {
+    font-size: 24px;
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+.h4 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.body {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.caption {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.label {
+    font-size: 12px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Colors */
+.color-primary {
+    color: #111827;
+}
+
+.color-secondary {
+    color: #6b7280;
+}
+
+.color-tertiary {
+    color: #9ca3af;
+}
+
+.color-accent {
+    color: #667eea;
+}
+
+/* Alignment */
+.align-left {
+    text-align: left;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.align-right {
+    text-align: right;
+}
+
+/* Weight */
+.weight-normal {
+    font-weight: 400;
+}
+
+.weight-medium {
+    font-weight: 500;
+}
+
+.weight-bold {
+    font-weight: 700;
+}
